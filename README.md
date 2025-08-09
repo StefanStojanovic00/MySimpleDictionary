@@ -69,10 +69,9 @@ Ova klasa predstavlja osnovni dictionary sa sledećim funkcionalnostima:
 - **Test 8: Benchmark poređenje sa standardnim Dictionary**  
   Izvršava seriju benchmark testova upoređujući brzine dodavanja, pronalaženja, uklanjanja i enumeracije elemenata između `MySimpleDictionary` i `System.Collections.Generic.Dictionary`. Ovo omogućava realnu procenu performansi i optimizacija.
 
-![Testovi i Benchmark MySimpleDictionary](https://github.com/user-attachments/assets/dc4ad078-3733-439f-a238-4e87b2eca17c)
+![Testovi i Benchmark MySimpleDictionary](https://github.com/user-attachments/assets/c1fc9ecd-29ca-47e3-bcc3-40298551b2fc)
 
 *Prikaz rezultata testova i benchmark-a za implementaciju `MySimpleDictionary`. Mogu se videti osnovni testovi, testovi kolizija, performansi, kao i poređenje sa .NET `Dictionary` klasom.*
-
 
 ---
 
