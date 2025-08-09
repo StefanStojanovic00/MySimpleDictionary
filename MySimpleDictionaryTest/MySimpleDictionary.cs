@@ -31,40 +31,45 @@ namespace MySimpleDictionaryTest
             FreeList = -1;
         }
 
-        private int GetBucketIndex(int hashCode)
-        {
-            return hashCode % Buckets.Length;
-        }
 
-        private int FindEntryIndex(TKey key)
+        private static void ValidateKey(TKey key)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
+        }
 
-            int hashCode = key.GetHashCode() & 0x7FFFFFFF;
+        private int GetBucketIndex(int hashCode, int length) => hashCode % length;
+        private int GetBucketIndex(int hashCode) => GetBucketIndex(hashCode, Buckets.Length);
+
+        private int ComputeHashCode(TKey key) => key.GetHashCode() & 0x7FFFFFFF;
+       
+       private int FindEntryIndex(TKey key)
+        {
+            ValidateKey(key);
+
+            int hashCode = ComputeHashCode(key);
             int bucketIndex = GetBucketIndex(hashCode);
 
             for (int i = Buckets[bucketIndex] - 1; i >= 0; i = Entries[i].Next)
             {
-                if (Entries[i].HashCode == hashCode &&
-                    EqualityComparer<TKey>.Default.Equals(Entries[i].Key, key))
-                {
+                if (Entries[i].HashCode == hashCode && EqualityComparer<TKey>.Default.Equals(Entries[i].Key, key))
                     return i;
-                }
             }
 
             return -1;
         }
 
+ 
+
         public void Add(TKey key, TValue value)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
+            ValidateKey(key);
 
             if (FindEntryIndex(key) >= 0)
             {
                 throw new ArgumentException("Ključ već postoji");
             }
 
-            int hashCode = key.GetHashCode() & 0x7FFFFFFF;
+            int hashCode = ComputeHashCode(key);
             int bucketIndex = GetBucketIndex(hashCode);
 
             int index;
@@ -109,9 +114,9 @@ namespace MySimpleDictionaryTest
 
         public bool Remove(TKey key)
         {
-            if (key == null) throw new ArgumentNullException(nameof(key));
+            ValidateKey(key);
 
-            int hashCode = key.GetHashCode() & 0x7FFFFFFF;
+            int hashCode = ComputeHashCode(key);
             int bucketIndex = GetBucketIndex(hashCode);
             int last = -1;
 
@@ -238,7 +243,7 @@ namespace MySimpleDictionaryTest
 
             set
             {
-                if (key == null) throw new ArgumentNullException(nameof(key));
+                ValidateKey(key);
 
                 int index = FindEntryIndex(key);
                 if (index >= 0)
