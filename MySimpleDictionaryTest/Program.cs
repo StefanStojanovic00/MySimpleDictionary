@@ -14,7 +14,7 @@ namespace MySimpleDictionaryTest
 
             
 
-            Console.WriteLine("=== TEST 1: Dodavanje, dohvat i indeksiranje ===");
+            Console.WriteLine("=== TEST 1: Dodavanje, pristup i indeksiranje ===");
             var dict = new MySimpleDictionary<int, string>();
             dict.Add(1, "jedan");
             dict.Add(2, "dva");
@@ -23,9 +23,9 @@ namespace MySimpleDictionaryTest
             dict[2] = "dva-modifikovano"; // indexer update
             Console.WriteLine(dict[2]); // očekuje "dva-modifikovano"
 
-            Console.WriteLine("\n=== TEST 2: Uklanjanje i provjera nakon uklanjanja ===");
+            Console.WriteLine("\n=== TEST 2: Uklanjanje i provera nakon uklanjanja ===");
             bool removed = dict.Remove(2);
-            Console.WriteLine($"Remove(2) uspješno: {removed}");
+            Console.WriteLine($"Remove(2) uspešno: {removed}");
             Console.WriteLine($"ContainsKey(2): {dict.ContainsKey(2)}"); // očekuje false
             try
             {
@@ -36,7 +36,7 @@ namespace MySimpleDictionaryTest
                 Console.WriteLine("KeyNotFoundException uhvaćen za dict[2]");
             }
 
-            Console.WriteLine("\n=== TEST 3: Kolizije sa namjerno istim hash bucket-om ===");
+            Console.WriteLine("\n=== TEST 3: Kolizije sa namerno istim hash bucket-om ===");
             var kolDict = new MySimpleDictionary<int, string>();
             int bucketCount = 4; // inicijalni kapacitet u tvom Dictionary-ju
             for (int i = 0; i < 10; i++)
@@ -79,10 +79,10 @@ namespace MySimpleDictionaryTest
                 sumKeys += kv.Key;
                 sumValues += kv.Value;
             }
-            Console.WriteLine($"Suma ključeva: {sumKeys}, suma vrijednosti: {sumValues}");
+            Console.WriteLine($"Suma ključeva: {sumKeys}, suma vrednosti: {sumValues}");
             Console.WriteLine($"Keys.Count: {bigDict.Keys.Count()}, Values.Count: {bigDict.Values.Count()}");
 
-            Console.WriteLine("\n=== TEST 6: Ključevi i vrijednosti kao reference tipovi i kompleksni tipovi ===");
+            Console.WriteLine("\n=== TEST 6: Ključevi i vrednosti kao reference tipovi i kompleksni tipovi ===");
             var complexDict = new MySimpleDictionary<(int, string), List<string>>();
             complexDict.Add((1, "A"), new List<string> { "jedan", "dva" });
             complexDict.Add((2, "B"), new List<string> { "tri" });
@@ -95,7 +95,7 @@ namespace MySimpleDictionaryTest
             bigDict.Clear();
             Console.WriteLine($"Count nakon Clear: {bigDict.Count} (očekuje 0)");
             bigDict.Add(100, 1000);
-            Console.WriteLine($"Vrijednost za ključ 100 nakon Clear i dodavanja: {bigDict[100]}");
+            Console.WriteLine($"Vrednost za ključ 100 nakon Clear i dodavanja: {bigDict[100]}");
 
             Console.WriteLine("\n=== TEST 8: Benchmark ===");
             Test8_Benchmark();
@@ -307,19 +307,19 @@ namespace MySimpleDictionaryTest
             double sysEnum = BenchmarkEnumerateSysDict(sysDict, Iterations);
 
             // Ispis rezultata
-            Console.WriteLine($"Dodavanje {N} elemenata, prosjek {Iterations} iteracija:");
+            Console.WriteLine($"Dodavanje {N} elemenata, prosek {Iterations} iteracija:");
             Console.WriteLine($"MySimpleDictionary: {myAdd:F2} ms");
             Console.WriteLine($"Dictionary        : {sysAdd:F2} ms\n");
 
-            Console.WriteLine($"Traženje {N} elemenata, prosjek {Iterations} iteracija:");
+            Console.WriteLine($"Traženje {N} elemenata, prosek {Iterations} iteracija:");
             Console.WriteLine($"MySimpleDictionary: {myFind:F2} ms");
             Console.WriteLine($"Dictionary        : {sysFind:F2} ms\n");
 
-            Console.WriteLine($"Uklanjanje {N} elemenata, prosjek {Iterations} iteracija:");
+            Console.WriteLine($"Uklanjanje {N} elemenata, prosek {Iterations} iteracija:");
             Console.WriteLine($"MySimpleDictionary: {myRemove:F2} ms");
             Console.WriteLine($"Dictionary        : {sysRemove:F2} ms\n");
 
-            Console.WriteLine($"Enumeracija {N} elemenata, prosjek {Iterations} iteracija:");
+            Console.WriteLine($"Enumeracija {N} elemenata, prosek {Iterations} iteracija:");
             Console.WriteLine($"MySimpleDictionary: {myEnum:F2} ms");
             Console.WriteLine($"Dictionary        : {sysEnum:F2} ms");
         }

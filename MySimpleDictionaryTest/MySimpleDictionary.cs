@@ -12,7 +12,7 @@ namespace MySimpleDictionaryTest
         private struct Entry
         {
             public int HashCode;    // hash code ključa
-            public int Next;        // indeks sljedećeg Entry u lancu (-1 ako nema)
+            public int Next;        // indeks sledećeg Entry u lancu (-1 ako nema)
             public TKey Key;
             public TValue Value;
         }
@@ -21,7 +21,7 @@ namespace MySimpleDictionaryTest
         private Entry[] Entries;
         private int count;             // broj zauzetih elemenata
         private int FreeList;          // indeks prvog slobodnog Entry (-1 ako nema)
-        private int FreeCount;         // broj slobodnih mjesta
+        private int FreeCount;         // broj slobodnih mesta
         private const int InitialCapacity = 4;
 
         public MySimpleDictionary()
