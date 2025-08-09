@@ -1,24 +1,24 @@
 # MySimpleDictionary<TKey, TValue>
 
-`MySimpleDictionary` je jednostavna implementacija generičkog haš rečnika (Dictionary) u C#, sa osnovnim funkcionalnostima koje imaju i standardni .NET rečnici.
+`MySimpleDictionary` je implementacija generičkog haš rečnika (Dictionary) u C#-u, sa osnovnim funkcionalnostima koje imaju i standardni .NET rečnici.
 `MySimpleDictionary` je implementiran kao **hash tabela** koja koristi tehniku **Separate Chaining** za efikasno rešavanje kolizija. Ova metoda omogućava skladištenje višestrukih elemenata sa istim hash kodom u povezane liste unutar pojedinačnih bucket-a.
 
 Implementacija i podešavanje `MySimpleDictionary` zasnovani su na članku sa sajta [Dotnetos](https://dotnetos.org/blog/2022-03-28-dictionary-implementation/).
 ## Opis
 
-Ova klasa predstavlja osnovni haš rečnik sa sledećim karakteristikama:
+Ova klasa predstavlja osnovni dictionary sa sledećim funkcionalnostima:
 
 - **Dodavanje elemenata** sa ključem i vrednošću.
-- **Dohvat vrednosti** po ključu koristeći Indexer ili metodu `TryGetValue`.
+- **Pristup vrednosti** po ključu koristeći Indexer ili metodu `TryGetValue`.
 - **Provera postojanja ključeva i vrednosti** (`ContainsKey`, `ContainsValue`).
 - **Uklanjanje pojedinačnih elemenata** (`Remove`) i **brisanje celog rečnika** (`Clear`).
-- **Iteriranje kroz sve elemente** (implementiran enumerator).
+- **Iteracija kroz sve elemente** (implementiran enumerator).
 - **Pristup listama svih ključeva i vrednosti** (`Keys`, `Values`).
 - **Automatsko proširenje unutrašnjih struktura** (metoda `Resize`) kad kapacitet postane premali.
 - Podržava rad sa **kompleksnim tipovima kao ključevima i vrednostima**.
-- Implementirana je osnovna **obrada kolizija haša** kroz povezane liste (chaining).
+- Implementirana je osnovna **obrada kolizija heša** kroz povezane liste (chaining).
 
-  Najvažniji elementi implementacije `Dictionary<TKey, TValue>` su:
+  Najvažniji elementi implementacije `MySimpleDictionary<TKey, TValue>` su:
 
 - **buckets** – skup elemenata sa sličnim hash vrednostima  
 - **entries** – elementi samog rečnika  
@@ -28,15 +28,15 @@ Ova klasa predstavlja osnovni haš rečnik sa sledećim karakteristikama:
 
 ---
 
-## Osnovne funkcionalnosti
+## Funkcionalnosti
 
 - Konstruktor sa inicijalnim kapacitetom.
 - `Add(TKey key, TValue value)` — dodaje novi par ključ-vrednost.
-- Indexer `this[TKey key]` — pristupa vrednosti po ključu (dohvat i postavljanje).
-- `TryGetValue(TKey key, out TValue value)` — pokušava dohvatiti vrednost bez izuzetka.
+- Indexer `this[TKey key]` — pristupa vrednosti po ključu.
+- `TryGetValue(TKey key, TValue value)` — pokušava dohvatiti vrednost bez exceptiona.
 - `Remove(TKey key)` — uklanja element sa zadatim ključem.
 - `Clear()` — briše ceo rečnik.
-- `ContainsKey(TKey key)` i `ContainsValue(TValue value)` — proveravaju postojanje ključeva i vrednosti.
+- `ContainsKey(TKey key)` i `ContainsValue(TValue value)` — proverava postojanje ključeva i vrednosti.
 - `Count` — broj elemenata u rečniku.
 - `Keys` i `Values` — enumeracije svih ključeva i vrednosti.
 - Enumeracija `IEnumerable<KeyValuePair<TKey, TValue>>` — omogućava `foreach` petlju.
@@ -45,7 +45,7 @@ Ova klasa predstavlja osnovni haš rečnik sa sledećim karakteristikama:
 
 ### Pregled testova:
 
-- **Test 1: Dodavanje, dohvat i indeksiranje**  
+- **Test 1: Dodavanje, pristup i indeksiranje**  
   Proverava osnovne operacije dodavanja elemenata (`Add`), pristupa vrednostima preko indeksa (`Indexer get/set`) i izmenu vrednosti postojećeg ključa.
 
 - **Test 2: Uklanjanje i provera prisutnosti ključeva**  
